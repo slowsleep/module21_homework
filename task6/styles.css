@@ -1,0 +1,12 @@
+.list-pics {
+    display: grid;
+    grid-template-columns: 22em 22em 22em;
+}
+
+.card {
+    display: block;
+}
+
+.card-img {
+    width: 200px;
+}
