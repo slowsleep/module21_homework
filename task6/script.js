@@ -3,6 +3,12 @@ let inputLimit = document.querySelector("#limit");
 let btnRequest = document.querySelector("#request");
 let listPics = document.querySelector(".list-pics");
 
+let imagesData = localStorage.getItem("img_data");
+
+if (imagesData) {
+    displayImages(JSON.parse(imagesData));
+}
+
 btnRequest.addEventListener("click", async function(){
     listPics.textContent = "";
 
@@ -16,12 +22,20 @@ btnRequest.addEventListener("click", async function(){
     } else {
         await fetch("https://picsum.photos/v2/list?page=" + inputNumPage.value + "&limit=" + inputLimit.value)
             .then((value) => value.json())
-            .then((data) => handleData(data))
+            .then((json) => {
+                saveImages(JSON.stringify(json));
+                displayImages(json);
+            })
             .catch((error) => console.log(error))
     }
 })
 
-function handleData(data) {
+function saveImages(imagesJSON) {
+    localStorage.setItem("img_data", imagesJSON);
+}
+
+function displayImages(data) {
+
     for (let elem of data) {
         let card = document.createElement("div");
         card.classList.add("card")
@@ -35,5 +49,3 @@ function handleData(data) {
         listPics.appendChild(card);
     }
 }
-
-// TODO: add saving the previous request to localStorage
