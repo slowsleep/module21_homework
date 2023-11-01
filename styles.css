@@ -1,0 +1,14 @@
+ul > li {
+    margin: 0 auto;
+    padding: 1em;
+    background-color: wheat;
+    border: 1px solid black;
+    cursor: pointer;
+    list-style:none;
+    text-align: center;
+    width: 40%;
+}
+
+ul > li > a {
+    text-decoration: none;
+}
